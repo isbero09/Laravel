@@ -35,5 +35,5 @@ Route::apiResource("detallesIngresos", DetallesIngresosApiController::class);
 
 Route::apiResource("menbresia", MenbresiaApiController::class);
 
-Route::apiResource("menbresiaUsuario", MenbresiaUsuarioApiController::class);
+Route::apiResource("menbresiasUsuario", MenbresiaUsuarioApiController::class);
 

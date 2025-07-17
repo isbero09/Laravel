@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Membresias;
 use App\Models\Menbresia;
 use Illuminate\Http\Request;
 
@@ -23,7 +22,7 @@ class MenbresiaApiController extends Controller
     {
         $valido = $request->validate([
             'nombre' => ["required", "string"],
-            'precio' => ["required", "double"],
+            'precio' => ["required", "numeric"],
             'descripcion' => ["required", "string"],
             'fecha_creacion' => ["required", "string"],
             'estado' => ["required", "string"],
@@ -48,7 +47,7 @@ class MenbresiaApiController extends Controller
         $actualizar = Menbresia::findOrFail($id);
         $valido = $request->validate([
             'nombre' => ["required", "string"],
-            'precio' => ["required", "double"],
+            'precio' => ["required", "numeric"],
             'descripcion' => ["required", "string"],
             'fecha_creacion' => ["required", "string"],
             'estado' => ["required", "string"],
@@ -63,6 +62,7 @@ class MenbresiaApiController extends Controller
     public function destroy(string $id)
     {
         $delete = Menbresia::findOrFail($id);
+        $delete->delete();
         if ($delete) {
             return response()->json(["message" => "Membresia borrada exitosamente"]);
         } else {

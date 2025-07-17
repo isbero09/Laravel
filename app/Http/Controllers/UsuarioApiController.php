@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
-use App\Models\Usuarios;
 use Illuminate\Http\Request;
 
 class UsuarioApiController extends Controller
@@ -37,41 +36,42 @@ class UsuarioApiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $cedula)
     {
-        return Usuario::findOrFail($id);
+        $usuario = Usuario::where('cedula', $cedula)->firstOrFail();
+        return $usuario;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $cedula)
     {
-        $actualizar = Usuario::findOrFail($id);
+        $actualizar = Usuario::where('cedula', $cedula)->firstOrFail();
+
         $valido = $request->validate([
             'cedula' => ["required", "string"],
-            'nombre' => ["required", "string"],
-            'apellido' => ["required", "string"],
+            'nombres' => ["required", "string"],
+            'apellidos' => ["required", "string"],
             'email' => ["required", "string"],
             'telefono' => ["required", "string"],
             'estado' => ["required", "string"],
             'fecha_nacimiento' => ["required", "string"],
         ]);
+
         $actualizar->update($valido);
-        return $actualizar;
+        return response()->json($actualizar);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $cedula)
     {
-        $delete = Usuario::findOrFail($id);
-        if ($delete) {
-            return response()->json(["message" => "Usuario borrado exitosamente"]);
-        } else {
-            return response()->json(["error" => "No se encontró el registro"], 404);
-        }
+        $delete = Usuario::where('cedula', $cedula)->firstOrFail();
+    $delete->delete();
+
+    return response()->json(["message" => "Usuario borrado exitosamente"]);
     }
 }
 

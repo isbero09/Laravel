@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('menbresia_usuarios', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->string('usuario');
             $table->string('membresia');
             $table->integer('membresia_id');
             $table->double('precio');

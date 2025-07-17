@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('producto');
             $table->double('precio');
             $table->date('fecha_venta');
-            $table->boolean('pagado');
+            $table->string('pagado');
             $table->date('fecha_pago')->nullable();
             $table->timestamps();
         });

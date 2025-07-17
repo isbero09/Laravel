@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Menbresia extends Model
 {
-    protected $table = 'membresias';
+    protected $table = 'menbresias';
 
     protected $primaryKey = 'id';
     public $incrementing = true;

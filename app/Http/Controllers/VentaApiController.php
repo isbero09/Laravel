@@ -25,7 +25,7 @@ class VentaApiController extends Controller
             'cliente' => ["required", "string"],
             'vendedor' => ["required", "string"],
             'producto' => ["required", "string"],
-            'precio' => ["required", "double"],
+            'precio' => ["required", "numeric  "],
             'fecha_venta' => ["required", "string"],
             'pagado' => ["required", "boolean"],
             'fecha_pago' => ["required", "string"],
@@ -52,7 +52,7 @@ class VentaApiController extends Controller
             'cliente' => ["required", "string"],
             'vendedor' => ["required", "string"],
             'producto' => ["required", "string"],
-            'precio' => ["required", "double"],
+            'precio' => ["required", "numeric"],
             'fecha_venta' => ["required", "string"],
             'pagado' => ["required", "boolean"],
             'fecha_pago' => ["required", "string"],
@@ -66,12 +66,12 @@ class VentaApiController extends Controller
      */
     public function destroy(string $id)
     {
-        $delete = Venta::findOrFail($id);
-        if ($delete) {
+        $venta = Venta::findOrFail($id);
+
+        if ($venta->delete()) {
             return response()->json(["message" => "Venta borrada exitosamente"]);
         } else {
-            return response()->json(["error" => "No se encontró el registro"], 404);
+            return response()->json(["error" => "Error al borrar la venta"], 500);
         }
     }
 }
-

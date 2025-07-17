@@ -23,7 +23,7 @@ class ProductoApiController extends Controller
     {
         $valido = $request->validate([
             'nombre' => ["required", "string"],
-            'precio' => ["required", "double"],
+            'precio' => ["required", "numeric"],
             'stock' => ["required", "integer"],
             'categoria_id' => ["required", "integer"],
             'descripcion' => ["required", "string"],
@@ -49,7 +49,7 @@ class ProductoApiController extends Controller
         $actualizar = Producto::findOrFail($id);
         $valido = $request->validate([
             'nombre' => ["required", "string"],
-            'precio' => ["required", "double"],
+            'precio' => ["required", "numeric"],
             'stock' => ["required", "integer"],
             'categoria_id' => ["required", "integer"],
             'descripcion' => ["required", "string"],
@@ -64,11 +64,15 @@ class ProductoApiController extends Controller
      */
     public function destroy(string $id)
     {
-        $delete = Producto::findOrFail($id);
-        if ($delete) {
-            return response()->json(["message" => "Producto borrado exitosamente"]);
-        } else {
+
+        $delete = Producto::find($id);
+
+        if (!$delete) {
             return response()->json(["error" => "No se encontró el registro"], 404);
         }
+
+        $delete->delete();  // Aquí eliminas el producto
+
+        return response()->json(["message" => "Producto borrado exitosamente"]);
     }
 }

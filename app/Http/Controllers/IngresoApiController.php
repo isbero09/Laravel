@@ -57,12 +57,12 @@ class IngresoApiController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
+
     {
         $delete = Ingreso::findOrFail($id);
-        if ($delete) {
-            return response()->json(["message" => "Ingreso borrado exitosamente"]);
-        } else {
-            return response()->json(["error" => "No se encontró el registro"], 404);
-        }
+
+        $delete->delete(); // 👈 ESTA LÍNEA ES CLAVE
+
+        return response()->json(["message" => "Ingreso borrado exitosamente"]);
     }
 }

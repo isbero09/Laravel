@@ -25,7 +25,7 @@ class MenbresiaUsuarioApiController extends Controller
             'usuario' => ["required", "string"],
             'membresia' => ["required", "string"],
             'membresia_id' => ["required", "integer"],
-            'precio' => ["required", "double"],
+            'precio' => ["required", "numeric"],
             'fecha_pago' => ["required", "string"],
             'fecha_inicio' => ["required", "string"],
             'fecha_fin' => ["required", "string"],
@@ -53,7 +53,7 @@ class MenbresiaUsuarioApiController extends Controller
             'usuario' => ["required", "string"],
             'membresia' => ["required", "string"],
             'membresia_id' => ["required", "integer"],
-            'precio' => ["required", "double"],
+            'precio' => ["required", "numeric"],
             'fecha_pago' => ["required", "string"],
             'fecha_inicio' => ["required", "string"],
             'fecha_fin' => ["required", "string"],
@@ -68,11 +68,14 @@ class MenbresiaUsuarioApiController extends Controller
      */
     public function destroy(string $id)
     {
-        $delete = MenbresiaUsuario::findOrFail($id);
-        if ($delete) {
-            return response()->json(["message" => "Membresia de usuario borrada exitosamente"]);
-        } else {
+        $delete = MenbresiaUsuario::find($id);  
+
+        if (!$delete) {
             return response()->json(["error" => "No se encontró el registro"], 404);
         }
+
+        $delete->delete(); // AQUÍ SE ELIMINA REALMENTE
+
+        return response()->json(["message" => "Membresía de usuario borrada exitosamente"]);
     }
 }
