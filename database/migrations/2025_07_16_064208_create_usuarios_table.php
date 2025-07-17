@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('telefono');
             $table->string('estado')->default('activo'); // puedes ajustar según tu lógica
             $table->date('fecha_nacimiento');
+            $table->timestamps(); // agrega created_at y updated_at
         });
     }
 

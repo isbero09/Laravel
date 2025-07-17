@@ -23,8 +23,8 @@ class UsuarioApiController extends Controller
     {
         $valido = $request->validate([
             'cedula' => ["required", "string"],
-            'nombre' => ["required", "string"],
-            'apellido' => ["required", "string"],
+            'nombres' => ["required", "string"],
+            'apellidos' => ["required", "string"],
             'email' => ["required", "string"],
             'telefono' => ["required", "string"],
             'estado' => ["required", "string"],

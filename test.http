@@ -1,0 +1,18 @@
+@api= http://127.0.0.1:8000
+
+###
+GET {{api}}/api/usuarios HTTP/1.1
+###
+POST {{api}}/api/usuarios HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+
+{
+    "cedula": "111",
+    "nombres": "String",
+    "apellidos": "String",
+    "email": "String",
+    "telefono": "String",
+    "estado": "String",
+    "fecha_nacimiento": "String"
+}
